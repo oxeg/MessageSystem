@@ -99,7 +99,7 @@ public class Client extends Thread {
     }
 
     private void increaseScore() {
-        final int delta = RANDOM.nextInt(100) - 50;
+        final int delta = RANDOM.nextInt(GameRules.MAX_SCORE) - (GameRules.MAX_SCORE / 2);
         System.out.println(name + " increasing score by " + delta);
         service.updateScore(sessionId, delta);
         state = State.GetScore;
