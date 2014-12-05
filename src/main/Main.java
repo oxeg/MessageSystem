@@ -27,7 +27,14 @@ public final class Main {
         final Client[] clients = {
                 new Client(frontEnd, "bob"),
                 new Client(frontEnd, "duke"),
-                new Client(frontEnd, "alice")
+                new Client(frontEnd, "alice"),
+                new Client(frontEnd, "kate"),
+                new Client(frontEnd, "john"),
+                new Client(frontEnd, "dave"),
+                new Client(frontEnd, "luke"),
+                new Client(frontEnd, "chewie"),
+                new Client(frontEnd, "anna"),
+                new Client(frontEnd, "sasha"),
         };
 
         for (Client client : clients) {

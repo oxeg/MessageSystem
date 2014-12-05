@@ -92,6 +92,7 @@ public class Client extends Thread {
         System.out.println(name + " score is " + score);
 
         if (score == GameRules.MAX_SCORE || score == GameRules.MIN_SCORE) {
+            System.out.println("==== " + name + " finished with score " + score + " ====");
             state = State.Finished;
         } else {
             state = State.IncreaseScore;
