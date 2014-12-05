@@ -5,7 +5,7 @@ package gameMechanics;
  */
 public final class UserScore {
     private final int userAccountId;
-    private int score = GameMechanics.DEFAULT_SCORE;
+    private int score = GameRules.DEFAULT_SCORE;
 
     public UserScore(int userAccountId) {
         this.userAccountId = userAccountId;

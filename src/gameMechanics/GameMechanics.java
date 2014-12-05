@@ -1,5 +1,6 @@
 package gameMechanics;
 
+import main.ThreadSettings;
 import messageSystem.Abonent;
 import messageSystem.Address;
 import messageSystem.MessageSystem;
@@ -10,10 +11,6 @@ import messageSystem.MessageSystem;
 public final class GameMechanics implements Abonent, Runnable {
     private final Address address = new Address();
     private final MessageSystem messageSystem;
-
-    public static final int DEFAULT_SCORE = 50;
-    private static final int MAX_SCORE = 100;
-    private static final int MIN_SCORE = 0;
 
     public GameMechanics(MessageSystem messageSystem) {
         this.messageSystem = messageSystem;
@@ -28,12 +25,12 @@ public final class GameMechanics implements Abonent, Runnable {
     public void increaseScore(UserScore score, int delta) {
         int newScore = score.getScore() + delta;
 
-        if (newScore > MAX_SCORE) {
-            newScore = MAX_SCORE;
+        if (newScore > GameRules.MAX_SCORE) {
+            newScore = GameRules.MAX_SCORE;
         }
 
-        if (newScore < MIN_SCORE) {
-            newScore = MIN_SCORE;
+        if (newScore < GameRules.MIN_SCORE) {
+            newScore = GameRules.MIN_SCORE;
         }
 
         score.setScore(newScore);
@@ -49,7 +46,7 @@ public final class GameMechanics implements Abonent, Runnable {
         while (true) {
             messageSystem.execForAbonent(this);
             try {
-                Thread.sleep(100);
+                Thread.sleep(ThreadSettings.SERVICE_SLEEP_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

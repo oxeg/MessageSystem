@@ -5,6 +5,7 @@ import accountService.MessageAuthenticate;
 import accountService.MessageRegister;
 import gameMechanics.MessageIncreaseScore;
 import gameMechanics.UserScore;
+import main.ThreadSettings;
 import messageSystem.Abonent;
 import messageSystem.Address;
 import messageSystem.Message;
@@ -53,6 +54,11 @@ public final class FrontEnd implements FrontEndService, Abonent, Runnable {
     }
 
     @Override
+    public boolean isAuthenticated(String sessionId) {
+        return accountMap.containsKey(sessionId);
+    }
+
+    @Override
     public int getScore(String sessionId) {
         final Account account = accountMap.get(sessionId);
         if (account == null) {
@@ -74,16 +80,18 @@ public final class FrontEnd implements FrontEndService, Abonent, Runnable {
         messageSystem.sendMessage(messageIncreaseScore);
     }
 
-    synchronized void registered(String name, boolean result) {
+    void registered(String name, boolean result) {
         waitingUsers.put(name, result);
     }
 
-    synchronized void authenticated(String sessionId, Account account) {
+    void authenticated(String sessionId, Account account) {
         accountMap.put(sessionId, account);
-        scoreMap.put(account.getId(), new UserScore(account.getId()));
+        if(account != null) {
+            scoreMap.put(account.getId(), new UserScore(account.getId()));
+        }
     }
 
-    synchronized void setScore(UserScore score) {
+    void setScore(UserScore score) {
         scoreMap.put(score.getUserAccountId(), score);
     }
 
@@ -97,7 +105,7 @@ public final class FrontEnd implements FrontEndService, Abonent, Runnable {
         while (true) {
             messageSystem.execForAbonent(this);
             try {
-                Thread.sleep(100);
+                Thread.sleep(ThreadSettings.SERVICE_SLEEP_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

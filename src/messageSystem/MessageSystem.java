@@ -8,11 +8,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author e.shubin
  */
 public final class MessageSystem {
-    private Map<Address, ConcurrentLinkedQueue<Message>> messages = new HashMap<>();
-    private AddressService addressService;
+    private final Map<Address, ConcurrentLinkedQueue<Message>> messages = new HashMap<>();
+    private final AddressService addressService = new AddressService();
 
-    public MessageSystem(AddressService addressService) {
-        this.addressService = addressService;
+    public MessageSystem() {
     }
 
     public AddressService getAddressService() {

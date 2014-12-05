@@ -1,5 +1,6 @@
 package accountService;
 
+import main.ThreadSettings;
 import messageSystem.Abonent;
 import messageSystem.Address;
 import messageSystem.MessageSystem;
@@ -39,7 +40,7 @@ public final class AccountService implements Abonent, Runnable {
         while (true){
             messageSystem.execForAbonent(this);
             try {
-                Thread.sleep(100);
+                Thread.sleep(ThreadSettings.SERVICE_SLEEP_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

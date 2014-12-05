@@ -10,6 +10,8 @@ public interface FrontEndService {
 
     public String authenticate(String name, String password);
 
+    public boolean isAuthenticated(String sessionId);
+
     public int getScore(String sessionId);
 
     public void updateScore(String sessionId, int delta);
