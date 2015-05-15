@@ -14,11 +14,14 @@ public final class Main {
         final MessageSystem messageSystem = new MessageSystem();
         final Thread accountServiceThread = new Thread(new AccountService(messageSystem));
         accountServiceThread.setDaemon(true);
+        accountServiceThread.setName("Account Service");
         final Thread gameMechanicsThread = new Thread(new GameMechanics(messageSystem));
         gameMechanicsThread.setDaemon(true);
+        gameMechanicsThread.setName("Game Mechanics");
         final FrontEnd frontEnd = new FrontEnd(messageSystem);
         final Thread frontEndThread = new Thread(frontEnd);
         frontEndThread.setDaemon(true);
+        frontEndThread.setName("FrontEnd");
 
         accountServiceThread.start();
         gameMechanicsThread.start();
